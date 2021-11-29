@@ -2,7 +2,8 @@ import random
 
 SEPARATOR = 35 * '='
 
-# Function for better clarity and readability. all other functions are used here 
+
+# Function for better clarity and readability. all other functions are used here
 def main():
     word_chars = secrete_word()
     play_game(word_chars)
@@ -13,18 +14,19 @@ def main():
             word_chars = secrete_word()
             play_game(word_chars)
         elif play_again == 'n':
-           print('EXIT...')
-           break
+            print('EXIT...')
+            break
         else:
             print('Wrong input.')
 
-    
-# Function which choose random word from txt file and create a list and append every letter in word to it and return the list
+
+# Function which choose random word from txt file and create a list and append every letter in word to it and return
+# the list
 def secrete_word():
     choose_from = []
     letters = []
-    with open('slova.txt', 'r') as txt:
-        txt.readline
+    with open('words.txt', 'r') as txt:
+        txt.readline()
         for word in txt:
             choose_from.append(word)
     random_word = random.choice(choose_from)
@@ -34,8 +36,7 @@ def secrete_word():
     return letters
 
 
-
-hangman_construction = [  """
+hangman_construction = ["""
                 --------
                 |      |
                 |      O
@@ -45,7 +46,7 @@ hangman_construction = [  """
                 |
                 ---
                 """,
-                """
+                        """
                 --------
                 |      |
                 |      O
@@ -55,7 +56,7 @@ hangman_construction = [  """
                 |
                 ---
                 """,
-                """
+                        """
                 ---------
                 |       |
                 |       O
@@ -65,7 +66,7 @@ hangman_construction = [  """
                 |
                 ---
                 """,
-                """
+                        """
                 --------
                 |      |
                 |      O
@@ -75,7 +76,7 @@ hangman_construction = [  """
                 |
                 ---
                 """,
-                """
+                        """
                 --------
                 |      |
                 |      
@@ -85,7 +86,7 @@ hangman_construction = [  """
                 |
                 ---
                 """,
-                """
+                        """
                 --------
                 |      
                 |      
@@ -95,15 +96,16 @@ hangman_construction = [  """
                 |
                 ---
                 """
-    ]
-# Function that solves whole game play, word = secret word 
+                        ]
+
+
+# Function that solves whole game play, word = secret word
 def play_game(word):
-    print(word)
     print("""Welcome. Let's play HANGMAN. Try to guess the secret word. 
-Player have 11 attemps but only 6 hp. 
-If player guess right letter he loses 1 attemp. 
-If player don't guess right letter he loses 1 attemp and 1 hp. """)
-    attemps = 11
+Player have 11 attempts but only 6 hp. 
+If player guess right letter he loses 1 attempt. 
+If player don't guess right letter he loses 1 attempt and 1 hp. """)
+    attempts = 11
     hp = 6
     # For hiding the word. Every letter = - 
     hidden_word = len(word) * '-'
@@ -120,30 +122,32 @@ If player don't guess right letter he loses 1 attemp and 1 hp. """)
             else:
                 guessed_letters.append(guess)
                 break
-        attemps -= 1 
+        attempts -= 1
         hidden_word_as_list = list(hidden_word)
-        print(hidden_word_as_list)
         # Passes all indices and values in the secret word. 
         for i, ch in enumerate(word):
             # If there is a match with guess letter and letter in secret word. 
             # Displays the message and the letter in secret word on the right index.
             if ch == guess:
-                print(f'Bravo, {guess} is in the word.',f'{attemps} left | {hp} left', SEPARATOR, sep='\n')
+                print(f'Bravo, {guess} is in the word.', f'{attempts} left | {hp} left', SEPARATOR, sep='\n')
                 hidden_word_as_list[i] = guess
             hidden_word = "".join(hidden_word_as_list)
         print(hidden_word)
         print(SEPARATOR)
-        # If guessed char is not in secret word. Displays message and hangman construction depends on actual amount of hp.
+        # If guessed char is not in secret word. Displays message and hangman construction depends on actual amount
+        # of hp.
         if guess not in word:
             hp -= 1
-            print('That letter is not in the word.', hangman_construction[hp], f'{attemps} attemps left | {hp} hp left', SEPARATOR, sep='\n')
+            print('That letter is not in the word.', hangman_construction[hp],
+                  f'{attempts} attempts left | {hp} hp left', SEPARATOR, sep='\n')
         # Check the condition  whether the player has won(each letter in secret word is guessed) or 
-        # loss(not every letter is guessed before player loses all attemps or hp)
+        # loss(not every letter is guessed before player loses all attempts or hp)
         if '-' not in hidden_word:
             print(SEPARATOR, f'You win! The secret word is {"".join(word)}.', SEPARATOR, sep='\n')
             break
-        elif ('-' in hidden_word and attemps == 0) or ('-' in hidden_word and hp == 0):
+        elif ('-' in hidden_word and attempts == 0) or ('-' in hidden_word and hp == 0):
             print(SEPARATOR, f'You loss! The secret word is {"".join(word)}.', SEPARATOR, sep='\n')
             break
+
 
 main()
