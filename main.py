@@ -5,13 +5,13 @@ SEPARATOR = 35 * '='
 
 # Function for better clarity and readability. all other functions are used here
 def main():
-    word_chars = secrete_word()
+    word_chars = secret_word()
     play_game(word_chars)
     # Loop that solves if player want to play again
     while True:
         play_again = input("Do you want to play again? Type 'y' for yes or 'n' for no: ").lower()
         if play_again == 'y':
-            word_chars = secrete_word()
+            word_chars = secret_word()
             play_game(word_chars)
         elif play_again == 'n':
             print('EXIT...')
@@ -22,7 +22,7 @@ def main():
 
 # Function which choose random word from txt file and create a list and append every letter in word to it and return
 # the list
-def secrete_word():
+def secret_word():
     choose_from = []
     letters = []
     with open('words.txt', 'r') as txt:
