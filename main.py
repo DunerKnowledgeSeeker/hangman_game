@@ -26,7 +26,6 @@ def secret_word():
     choose_from = []
     letters = []
     with open('words.txt', 'r') as txt:
-        txt.readline()
         for word in txt:
             choose_from.append(word)
     random_word = random.choice(choose_from)
